@@ -2,7 +2,9 @@ package com.hx.film.controller;
 
 import com.hx.film.model.Acteur;
 import com.hx.film.model.Film;
+import com.hx.film.service.FilmNotFoundException;
 import com.hx.film.service.FilmService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +12,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class Controller {
 
     @Autowired
-    private FilmService filmService;
+    private final FilmService filmService;
 
     @PostMapping("/api/film")
     @ResponseStatus(HttpStatus.CREATED)
@@ -34,5 +37,12 @@ public class Controller {
     @GetMapping("/api/acteur/{id}")
     public Acteur getActeurById(@PathVariable Long id) {
         return filmService.getActeurById(id);
+    }
+
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    void filmNotFoundException(FilmNotFoundException e) {
+
     }
 }

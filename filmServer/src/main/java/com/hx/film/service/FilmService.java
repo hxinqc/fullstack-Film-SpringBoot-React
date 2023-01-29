@@ -5,6 +5,7 @@ import com.hx.film.model.Film;
 import com.hx.film.repo.ActeurRepository;
 import com.hx.film.repo.FilmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,8 +40,9 @@ public class FilmService {
         return filmRepository.findAll();
     }
 
+    @Cacheable("films")
     public Film getFilmById(Long id) {
-        return filmRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
+        return filmRepository.findById(id).orElseThrow(() -> new FilmNotFoundException());
     }
 
     public Acteur getActeurById(Long id) {

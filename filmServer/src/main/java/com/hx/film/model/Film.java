@@ -27,4 +27,12 @@ public class Film {
     @OneToMany(mappedBy = "film", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Acteur> acteurs;
 
+    @Override
+    public String toString() {
+        return "Film{" +
+                "id=" + id +
+                ", titre='" + titre + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

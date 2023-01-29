@@ -24,9 +24,23 @@ public class Acteur {
     @Column
     @Enumerated
     private Gender gender;
+
+    @Column
+    private int age;
+
     @ManyToOne
     @JoinColumn(name = "id")
     @JsonIgnore
     private Film film;
 
+    @Override
+    public String toString() {
+        return "Acteur{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", gender='" + gender + '\'' +
+                ", age=" + age +
+                '}';
+    }
 }
