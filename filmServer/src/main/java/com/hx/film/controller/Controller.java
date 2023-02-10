@@ -2,6 +2,7 @@ package com.hx.film.controller;
 
 import com.hx.film.model.Acteur;
 import com.hx.film.model.Film;
+import com.hx.film.model.FilmDisplay;
 import com.hx.film.service.FilmNotFoundException;
 import com.hx.film.service.FilmService;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +21,8 @@ public class Controller {
 
     @PostMapping("/api/film")
     @ResponseStatus(HttpStatus.CREATED)
-    public Film createFilm(@RequestBody Film film) {
-        return filmService.createFilm(film);
+    public FilmDisplay createFilm(@RequestBody FilmDisplay filmDisplay) {
+        return filmService.createFilm(filmDisplay);
     }
 
     @GetMapping("/api/film")
