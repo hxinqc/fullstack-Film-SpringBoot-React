@@ -2,6 +2,7 @@ package com.hx.film.service;
 
 import com.hx.film.model.Acteur;
 import com.hx.film.model.Film;
+import com.hx.film.model.FilmDisplay;
 import com.hx.film.repo.ActeurRepository;
 import com.hx.film.repo.FilmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +25,19 @@ public class FilmService {
     }
 
     @Transactional
-    public Film createFilm(Film film) {
+    public FilmDisplay createFilm(FilmDisplay filmDisplay) {
         Film newFilm = Film.builder()
-                .titre(film.getTitre())
-                .acteurs(film.getActeurs())
-                .description(film.getDescription())
+                .titre(filmDisplay.getTitre())
+                .description(filmDisplay.getDescription())
                 .build();
-        List<Acteur> acteurs = film.getActeurs();
-        acteurs.forEach(acteur -> acteur.setFilm(newFilm));
-        newFilm.setActeurs(acteurs);
-        return filmRepository.save(newFilm);
+        List<Acteur> acteurs = filmDisplay.getActeurs();
+        Film finalNewFilm = filmRepository.save(newFilm);
+
+        acteurs.forEach(acteur -> { acteur.setFilm(finalNewFilm);
+            acteurRepository.save(acteur);});
+        filmDisplay.setId(finalNewFilm.getId());
+        filmDisplay.setActeurs(acteurs);
+        return filmDisplay;
     }
 
     public List<Film> getAllFilms() {

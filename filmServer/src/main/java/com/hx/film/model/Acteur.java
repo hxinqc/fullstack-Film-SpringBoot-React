@@ -15,7 +15,7 @@ public class Acteur {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "acteur_seq")
     @SequenceGenerator(name = "acteur_seq", allocationSize = 1)
-    @Column(name = "acteur_id")
+    @Column(name = "id")
     private Long id;
     @Column
     private String nom;
@@ -29,7 +29,7 @@ public class Acteur {
     private int age;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "filmId")
     @JsonIgnore
     private Film film;
 
