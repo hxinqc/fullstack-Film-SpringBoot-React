@@ -35,7 +35,7 @@ class FilmServiceTest {
         List<Acteur> acteurs = new ArrayList<>();
         acteurs.add(new Acteur(null, "Jack", "Mac", Gender.MAN, 30, film));
         acteurs.add(new Acteur(null, "Mamda", "Luc", Gender.WOMAN, 20, film));
-        film.setActeurs(acteurs);
+//        film.setActeurs(acteurs);
         Film savedFilm = filmRepository.save(film);
 
         Film retrieveFilm = filmService.getFilmById(film.getId());

@@ -35,11 +35,13 @@ class FilmRepositoryTest {
         List<Acteur> acteurs = new ArrayList<>();
         acteurs.add(new Acteur(null, "Jack", "Mac", Gender.MAN, 30, film));
         acteurs.add(new Acteur(null, "Mamda", "Luc", Gender.WOMAN, 20, film));
-        film.setActeurs(acteurs);
+//        film.setActeurs(acteurs);
 //        Film savedFilm = filmRepository.save(film); //change it to TestEntityManager
         Film savedFilm = testEntityManager.persistFlushFind(film); //persistAndFlush, persistFlushFind
         System.out.println(savedFilm);
-        System.out.println(savedFilm.getActeurs());
+        acteurs.stream().forEach(acteur -> {acteur.setFilm(savedFilm);
+            testEntityManager.persistFlushFind(acteur);});
+//        System.out.println(savedFilm.getActeurs());
 
         Film retrieveFilm = filmRepository.findById(savedFilm.getId()).get();
 

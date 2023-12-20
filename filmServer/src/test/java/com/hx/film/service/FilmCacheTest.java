@@ -24,7 +24,7 @@ public class FilmCacheTest {
     void getFilmById_forMultipleRequests_isRetrievedFromCache() {
 
         Long id = 123L;
-        given(filmRepository.findById(id)).willReturn(Optional.of(new Film(id, "titre", "description", null)));
+        given(filmRepository.findById(id)).willReturn(Optional.of(new Film(id, "titre", "description")));
 
         filmService.getFilmById(id);
         filmService.getFilmById(id);
